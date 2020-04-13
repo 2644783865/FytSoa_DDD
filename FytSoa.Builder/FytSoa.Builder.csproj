@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FytSoa.Common\FytSoa.Common.csproj" />
+    <ProjectReference Include="..\FytSoa.SugarCore\FytSoa.SugarCore.csproj" />
+  </ItemGroup>
+
+</Project>
