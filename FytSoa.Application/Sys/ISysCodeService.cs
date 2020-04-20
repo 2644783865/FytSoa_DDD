@@ -35,13 +35,13 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<SysCode>> GetModel(long id);
+        Task<ApiResult<SysCode>> GetModel(string id);
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Delete(List<long> ids);
+        Task<ApiResult<string>> Delete(List<string> ids);
     }
 }

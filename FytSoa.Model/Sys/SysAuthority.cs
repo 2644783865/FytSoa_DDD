@@ -15,17 +15,17 @@ namespace FytSoa.Model.Sys
         /// <summary>
         /// 角色编号
         /// <summary>
-        public long RoleId { get; set; }
+        public string RoleId { get; set; }
 
         /// <summary>
         /// 管理员编号
         /// <summary>
-        public long AdminId { get; set; }
+        public string AdminId { get; set; }
 
         /// <summary>
         /// 菜单编号
         /// <summary>
-        public long MenuId { get; set; }
+        public string MenuId { get; set; }
 
         /// <summary>
         /// 按钮功能组

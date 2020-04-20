@@ -5,18 +5,15 @@ import Main from './views/Main.vue'
 import Table from './views/nav1/Table.vue'
 import Form from './views/nav1/Form.vue'
 import user from './views/nav1/user.vue'
-import Page4 from './views/nav2/Page4.vue'
-import Page5 from './views/nav2/Page5.vue'
-import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 import sysorganize from './views/sys/organize'
 import sysrole from './views/sys/role'
-import syspost from './views/sys/post.vue'
-import sysadmin from './views/sys/admin.vue'
-import sysmenu from './views/sys/menu.vue'
-import syscode from './views/sys/code.vue'
-import syslog from './views/sys/log.vue'
+import syspost from './views/sys/post'
+import sysadmin from './views/sys/admin'
+import sysmenu from './views/sys/menu'
+import syscode from './views/sys/code'
+import syslog from './views/sys/logs'
 
 let routes = [{
         path: '/login',
@@ -41,26 +38,7 @@ let routes = [{
             { path: '/table', component: Table, name: 'Table' },
             { path: '/form', component: Form, name: 'Form' },
             { path: '/user', component: user, name: '列表' },
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '导航二',
-        iconCls: 'fa fa-id-card-o',
-        children: [
-            { path: '/page4', component: Page4, name: '页面4' },
-            { path: '/page5', component: Page5, name: '页面5' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-address-card',
-        leaf: true, //只有一个节点
-        children: [
-            { path: '/page6', component: Page6, name: '导航三' }
+            { path: '/echarts', component: echarts, name: 'echarts' }
         ]
     },
     {
@@ -69,7 +47,6 @@ let routes = [{
         name: '系统管理',
         iconCls: 'fa fa-bar-chart',
         children: [
-            { path: '/echarts', component: echarts, name: 'echarts' },
             { path: '/sys/organize', component: sysorganize, name: '部门管理' },
             { path: '/sys/role', component: sysrole, name: '角色管理' },
             { path: '/sys/post', component: syspost, name: '岗位管理' },

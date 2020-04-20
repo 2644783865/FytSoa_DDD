@@ -1,3 +1,4 @@
+using FytSoa.Application.Sys.Dto;
 using FytSoa.Common;
 using FytSoa.Model.Sys;
 using System;
@@ -15,6 +16,12 @@ namespace FytSoa.Application.Sys
         /// <param name="param"></param>
         /// <returns></returns>
         Task<ApiResult<Page<SysRole>>> PageList(PageParam param);
+
+        /// <summary>
+        /// 查询角色组
+        /// </summary>
+        /// <returns></returns>
+        Task<ApiResult<List<SysRoleGroupDto>>> GroupSelect();
 
         /// <summary>
         /// 添加
@@ -35,13 +42,13 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<SysRole>> GetModel(long id);
+        Task<ApiResult<SysRole>> GetModel(string id);
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Delete(List<long> ids);
+        Task<ApiResult<string>> Delete(List<string> ids);
     }
 }

@@ -1,3 +1,4 @@
+using FytSoa.Application.Sys.Dto;
 using FytSoa.Common;
 using FytSoa.Model.Sys;
 using System;
@@ -14,34 +15,41 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<ApiResult<Page<SysMenu>>> PageList(PageParam param);
+        Task<ApiResult<List<SysMenuTree>>> PageList(PageParam param);
+
+        /// <summary>
+        /// 级联选择列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<ApiResult<List<SysMenuSelect>>> GetSelect();
 
         /// <summary>
         /// 添加
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Add(SysMenu model);
+        Task<ApiResult<string>> Add(SysMenuParam model);
 
         /// <summary>
         /// 修改
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Modify(SysMenu model);
+        Task<ApiResult<string>> Modify(SysMenuParam model);
 
         /// <summary>
         /// 查询
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<SysMenu>> GetModel(long id);
+        Task<ApiResult<SysMenu>> GetModel(string id);
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Delete(List<long> ids);
+        Task<ApiResult<string>> Delete(List<string> ids);
     }
 }

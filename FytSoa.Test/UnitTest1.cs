@@ -12,7 +12,7 @@ namespace FytSoa.Test
     public class UnitTest1
     {
         private static int N = 2000000;
-        private static HashSet<long> set = new HashSet<long>();
+        private static HashSet<string> set = new HashSet<string>();
 
         private static object o = new object();
         private static int taskCount = 0;

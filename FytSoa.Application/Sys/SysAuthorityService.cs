@@ -77,32 +77,13 @@ namespace FytSoa.Application.Sys
             return result;
         }
 
-        /// <summary>
-        /// 根据角色查询授权列表
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task<ApiResult<List<SysAuthority>>> GetListByRole(long roleId)
-        {
-            var result = new ApiResult<List<SysAuthority>>();
-            try
-            {
-                await _thisRepository.GetListAsync(m=>m.RoleId== roleId,m=>m.MenuId,2);
-            }
-            catch (Exception ex)
-            {
-                result.StatusCode = (int)HttpStatusCode.InternalServerError;
-                result.Message = ex.Message;
-            }
-            return result;
-        }
 
         /// <summary>
-        /// 根据角色删除授权信息
+        /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<ApiResult<string>> Delete(List<long> ids)
+        public async Task<ApiResult<string>> Delete(List<string> ids)
         {
             var result = new ApiResult<string>();
             try

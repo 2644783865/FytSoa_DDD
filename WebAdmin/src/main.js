@@ -13,8 +13,6 @@ import routes from './routes'
 import Mock from './mock'
 Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
-import './styles/vars.scss'
-
 import api from './api'
 
 Vue.use(ElementUI, { size: 'medium' })

@@ -11,7 +11,7 @@ namespace FytSoa.Model.Sys
     /// 岗位表
     /// </summary>
     [SugarTable("sys_post")]
-    public class SysPost : EntityBase<long>
+    public class SysPost : EntityBase<string>
     {
 
         /// <summary>

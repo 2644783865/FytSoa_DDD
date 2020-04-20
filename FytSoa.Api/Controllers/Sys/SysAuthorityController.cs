@@ -24,7 +24,7 @@ namespace FytSoa.Api.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ApiResult<Page<SysAuthority>>> List([FromBody] PageParam param) => await _sysAuthorityService.PageList(param);
+        public async Task<ApiResult<Page<SysAuthority>>> List([FromQuery] PageParam param) => await _sysAuthorityService.PageList(param);
 
         /// <summary>
         /// 添加一条信息
@@ -41,19 +41,13 @@ namespace FytSoa.Api.Controllers
         [HttpPut]
         public async Task<ApiResult<string>> Modify([FromBody] SysAuthority model) => await _sysAuthorityService.Modify(model);
 
-        /// <summary>
-        /// 获得一条信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<ApiResult<List<SysAuthority>>> GetListByRole(long id) => await _sysAuthorityService.GetListByRole(id);
 
         /// <summary>
         /// 删除，支持多条
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ApiResult<string>> Delete([FromBody] List<long> ids) => await _sysAuthorityService.Delete(ids);
+        public async Task<ApiResult<string>> Delete([FromBody] List<string> ids) => await _sysAuthorityService.Delete(ids);
 
     }
 }

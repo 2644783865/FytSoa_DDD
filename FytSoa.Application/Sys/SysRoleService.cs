@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using FytSoa.Application.Sys.Dto;
 using FytSoa.Common;
+using FytSoa.Common.Extensions;
 using FytSoa.Model.Sys;
 using FytSoa.Repository.Interfaces;
+using FytSoa.SugarCore;
 
 namespace FytSoa.Application.Sys
 {
-    public class SysRoleService : ISysRoleService
+    public class SysRoleService : MyContext, ISysRoleService
     {
         private readonly IBaseRepository<SysRole> _thisRepository;
         public SysRoleService(IBaseRepository<SysRole> thisRepository)
@@ -27,7 +31,38 @@ namespace FytSoa.Application.Sys
             var result = new ApiResult<Page<SysRole>>();
             try
             {
-                result.Data = await _thisRepository.GetPagesAsync(param.page,param.limit);
+                Expression<Func<SysRole, bool>> where = e => true;
+                if (!string.IsNullOrEmpty(param.key))
+                {
+                    where = where.And(e => e.Name.Contains(param.key));
+                }
+                if (param.status != 0)
+                {
+                    where = where.And(e => e.Status == (param.status == 1 ? true : false));
+                }
+                result.Data = await _thisRepository.GetPagesAsync(where, m=>m.Sort,1,param.page,param.limit);
+            }
+            catch (Exception ex)
+            {
+                result.StatusCode = (int)HttpStatusCode.InternalServerError;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 查询角色组
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ApiResult<List<SysRoleGroupDto>>> GroupSelect()
+        {
+            var result = new ApiResult<List<SysRoleGroupDto>>();
+            try
+            {
+                result.Data = await Db.Queryable<SysRole>().Where(m=>m.ParentId=="0" && !m.IsDel && m.Status).Select(m=>new SysRoleGroupDto() { 
+                    label=m.Name,
+                    value=m.Id
+                }).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -47,6 +82,8 @@ namespace FytSoa.Application.Sys
             var result = new ApiResult<string>();
             try
             {
+                model.Id = Unique.Id();
+                model.CreateUser = "admin";
                 await _thisRepository.AddAsync(model);
             }
             catch (Exception ex)
@@ -67,7 +104,7 @@ namespace FytSoa.Application.Sys
             var result = new ApiResult<string>();
             try
             {
-                await _thisRepository.UpdateAsync(model);
+                await _thisRepository.UpdateAsync(model,m=>new {m.CreateUser,m.CreateTime,m.IsDel });
             }
             catch (Exception ex)
             {
@@ -82,7 +119,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ApiResult<SysRole>> GetModel(long id)
+        public async Task<ApiResult<SysRole>> GetModel(string id)
         {
             var result = new ApiResult<SysRole>();
             try
@@ -102,7 +139,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<ApiResult<string>> Delete(List<long> ids)
+        public async Task<ApiResult<string>> Delete(List<string> ids)
         {
             var result = new ApiResult<string>();
             try

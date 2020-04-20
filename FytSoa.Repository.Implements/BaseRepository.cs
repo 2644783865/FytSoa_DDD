@@ -7,6 +7,7 @@ using SqlSugar;
 using FytSoa.Repository.Interfaces;
 using FytSoa.SugarCore;
 using FytSoa.Common;
+using FytSoa.Common.Extensions;
 
 namespace FytSoa.Repository.Implements
 {
@@ -176,7 +177,7 @@ namespace FytSoa.Repository.Implements
         /// <returns></returns>
         public async Task<int> DeleteAsync(string parm, bool Async = true)
         {
-            var list = Utils.StrToListString(parm);
+            var list = parm.GetStrList();
             return Async ? await Db.Deleteable<T>().In(list.ToArray()).ExecuteCommandAsync() : Db.Deleteable<T>().In(list.ToArray()).ExecuteCommand();
         }
 

@@ -70,4 +70,23 @@ body {
 .fade-leave-active {
 	opacity: 0;
 }
+.el-pagination{
+	text-align: right;
+}
+.cur-tag{
+	position: relative;
+    display: inline-block;
+    padding: 1px 6px !important;
+    font-size: 12px;
+    text-align: center;
+    background-color: #FF5722;
+    color: #fff;
+    border-radius: 2px!important;
+	height: 18px;
+    line-height: 18px;
+}
+.cur-tag.bg-cyan{
+	background-color: #2F4056!important;
+	color: #fff!important;
+}
 </style>

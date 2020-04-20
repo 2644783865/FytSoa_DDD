@@ -11,7 +11,7 @@ namespace FytSoa.Model.Sys
     /// 字典类型表
     /// </summary>
     [SugarTable("sys_codetype")]
-    public class SysCodeType : EntityBase<long>
+    public class SysCodeType : EntityBase<string>
     {
 
         /// <summary>

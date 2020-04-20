@@ -4,7 +4,7 @@ import { Notification, MessageBox, Message } from 'element-ui'
 
 const service = axios.create({
     // axios中请求配置有baseURL选项，表示请求URL公共部分
-    baseURL: 'http://192.168.1.4:5000/',
+    baseURL: 'http://192.168.1.3:5000/',
     // 超时
     timeout: 10000,
     withCredentials: false,
@@ -17,7 +17,7 @@ const service = axios.create({
 //         if (getToken()) {
 //             config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
 //         }
-//         return config
+//         return configcle
 //     },
 //     error => {
 //         console.log(error)
@@ -70,7 +70,7 @@ const request = {
      */
     post(url, data) {
         return new Promise((resolve, reject) => {
-            service.post(url, qs.stringify(data))
+            service.post(url, JSON.stringify(data))
                 .then(res => {
                     resolve(res.data)
                 }, err => {
@@ -124,7 +124,7 @@ const request = {
      */
     put(url, data) {
         return new Promise((resolve, reject) => {
-            service.put(url, qs.stringify(data))
+            service.put(url, JSON.stringify(data))
                 .then(res => {
                     resolve(res.data)
                 }, err => {

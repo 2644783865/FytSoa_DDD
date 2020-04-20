@@ -82,7 +82,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ApiResult<SysLog>> GetModel(long id)
+        public async Task<ApiResult<SysLog>> GetModel(string id)
         {
             var result = new ApiResult<SysLog>();
             try
@@ -102,7 +102,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<ApiResult<string>> Delete(List<long> ids)
+        public async Task<ApiResult<string>> Delete(List<string> ids)
         {
             var result = new ApiResult<string>();
             try

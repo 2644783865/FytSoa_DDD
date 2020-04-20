@@ -11,7 +11,7 @@ namespace FytSoa.Model.Sys
     /// 系统日志表
     /// </summary>
     [SugarTable("sys_log")]
-    public class SysLog : Entity<long>
+    public class SysLog : Entity<string>
     {
 
         /// <summary>

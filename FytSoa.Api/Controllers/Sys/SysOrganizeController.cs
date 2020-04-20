@@ -56,7 +56,7 @@ namespace FytSoa.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ApiResult<SysOrganize>> GetModel(long id) => await _sysOrganizeService.GetModel(id);
+        public async Task<ApiResult<SysOrganize>> GetModel(string id) => await _sysOrganizeService.GetModel(id);
 
         /// <summary>
         /// 删除，支持多条

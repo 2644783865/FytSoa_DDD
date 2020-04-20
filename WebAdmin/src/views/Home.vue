@@ -132,14 +132,13 @@
 				this.sysUserName = user.name || '';
 				this.sysUserAvatar = user.avatar || '';
 			}
-
+			this.sysUserAvatar='https://images.cnblogs.com/cnblogs_com/dreamsqin/1299242/o_679640EA-CE04-4586-8284-16AEB5D15DF7.gif';
 		}
 	}
 
 </script>
 
 <style scoped lang="scss">
-	@import '~scss_vars';
 	.el-menu.active{
 		width:100% !important;
 	}
@@ -151,7 +150,7 @@
 		.header {
 			height: 60px;
 			line-height: 60px;
-			background: $color-primary;
+			background: #20a0ff;
 			color:#fff;
 			.userinfo {
 				text-align: right;

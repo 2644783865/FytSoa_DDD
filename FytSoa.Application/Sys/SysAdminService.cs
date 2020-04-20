@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using FytSoa.Common;
 using FytSoa.Model.Sys;
 using FytSoa.Repository.Interfaces;
-using FytSoa.SugarCore;
 
 namespace FytSoa.Application.Sys
 {
-    public class SysAdminService :  ISysAdminService
+    public class SysAdminService : ISysAdminService
     {
         private readonly IBaseRepository<SysAdmin> _thisRepository;
         public SysAdminService(IBaseRepository<SysAdmin> thisRepository)
@@ -83,7 +82,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ApiResult<SysAdmin>> GetModel(long id)
+        public async Task<ApiResult<SysAdmin>> GetModel(string id)
         {
             var result = new ApiResult<SysAdmin>();
             try
@@ -103,7 +102,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<ApiResult<string>> Delete(List<long> ids)
+        public async Task<ApiResult<string>> Delete(List<string> ids)
         {
             var result = new ApiResult<string>();
             try

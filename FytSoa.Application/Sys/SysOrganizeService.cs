@@ -92,7 +92,7 @@ namespace FytSoa.Application.Sys
                 var list = new List<SysOrganizeSelect>();
                 //查询所有
                 var reslist = await _thisRepository.GetListAsync();
-                foreach (var item in reslist.Where(m => m.ParentId == 0).OrderByDescending(m => m.Sort))
+                foreach (var item in reslist.Where(m => m.ParentId == "0").OrderByDescending(m => m.Sort))
                 {
                     var selectModel = new SysOrganizeSelect() { 
                         value=item.Id.ToString(),
@@ -116,7 +116,7 @@ namespace FytSoa.Application.Sys
         /// 递归形成tree
         /// </summary>
         /// <returns></returns>
-        private List<SysOrganizeSelect> GetChildSelect(List<SysOrganizeSelect> resList, List<SysOrganize> sourceList, long id)
+        private List<SysOrganizeSelect> GetChildSelect(List<SysOrganizeSelect> resList, List<SysOrganize> sourceList, string id)
         {
             var child = sourceList.Where(m => m.ParentId == id).OrderByDescending(m => m.Sort).ToList();
             foreach (var item in child)
@@ -144,9 +144,9 @@ namespace FytSoa.Application.Sys
             var result = new ApiResult<string>();
             try
             {
-                var organizeModel = model.MapTo<SysOrganizeParam, SysOrganize>();
+                var organizeModel = model.MapTo<SysOrganizeParam, SysOrganize>(m=>m.Id);
                 organizeModel.Id = Unique.Id();
-                organizeModel.ParentId = model.Parent.GetLong()[model.Parent.GetLong().Count-1];
+                organizeModel.ParentId = model.Parent[model.Parent.Count-1];
                 organizeModel.ParentIdList = string.Join(",",model.Parent.ToArray())+","+organizeModel.Id; 
                 organizeModel.CreateUser = "admin";
                 //根据父级查询等级
@@ -176,7 +176,7 @@ namespace FytSoa.Application.Sys
             try
             {
                 var organizeModel = model.MapTo<SysOrganizeParam, SysOrganize>();
-                organizeModel.ParentId = model.Parent.GetLong()[model.Parent.GetLong().Count - 1];
+                organizeModel.ParentId = model.Parent[model.Parent.Count - 1];
                 organizeModel.ParentIdList = string.Join(",", model.Parent) + "," + organizeModel.Id;
                 //根据父级查询等级
                 var parentModel = await _thisRepository.GetModelAsync(m => m.Id == organizeModel.ParentId);
@@ -199,7 +199,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ApiResult<SysOrganize>> GetModel(long id)
+        public async Task<ApiResult<SysOrganize>> GetModel(string id)
         {
             var result = new ApiResult<SysOrganize>();
             try

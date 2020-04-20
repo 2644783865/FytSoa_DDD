@@ -61,7 +61,7 @@ namespace FytSoa.Api.Controllers
         /// <param name="ids">List</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ApiResult<string>> Delete([FromBody] List<long> ids) => await _adminService.Delete(ids);
+        public async Task<ApiResult<string>> Delete([FromBody] List<string> ids) => await _adminService.Delete(ids);
 
     }
 }

@@ -54,6 +54,7 @@
 	</el-dialog>
 </template>
 <script>
+import os from '@/common/js/util'
 export default {
 	data() {
 		return {
@@ -111,7 +112,7 @@ export default {
 			dialogVisible: false,
 			btnLoading: false
 		}
-    },
+	},
 	methods: {
 		onClose() {
 			this.formData = {
@@ -130,38 +131,93 @@ export default {
 			this.dialogVisible = false
 			this.$emit('update:visible', false)
 		},
-		refreshSelect(){
-			console.log('refreshSelect');
+		refreshSelect(type) {
+			var _this = this
+			this.$api.sys.organize
+				.getSelect()
+				.then(({ statusCode, data, message }) => {
+					if (statusCode == 200) {
+						this.parentIdOptions = data
+					} else {
+						this.$notify({
+							message: message,
+							type: 'error'
+						})
+					}
+				})
+				.catch(() => {
+					this.loading = false
+				})
 		},
 		handleAdd() {
+			this.refreshSelect(1)
 			this.formData.id = '0'
 			this.dialog.title = '添加部门'
 			this.dialogVisible = true
 		},
 		handelModify(record) {
-			console.log('BBB')
+			record.parent = []
+			var str = record.parentIdList.split(',')
+			str.forEach(function(item, i) {
+				if (item != record.id) {
+					record.parent.push(item)
+				}
+			})
+			this.refreshSelect(2)
 			this.dialog.title = '编辑部门'
 			this.dialogVisible = true
 			this.$nextTick(() => {
-                this.formData = this.deepClone(record)
+				this.formData = os.deepClone(record)
 			})
 		},
 		handelConfirm() {
 			this.$refs['elForm'].validate(valid => {
 				if (!valid) return
-				console.log('Add', this.formData)
-			})
-        },
-        deepClone(obj) {
-			let newObj = obj.push ? [] : {}
-			for (let attr in obj) {
-				if (typeof obj[attr] === 'object') {
-					newObj[attr] = this.deepClone(obj[attr])
+				if (this.formData.id == '0') {
+					this.formData.id = ''
+					this.$api.sys.organize
+						.submit(this.formData)
+						.then(({ statusCode, data, message }) => {
+							if (statusCode == 200) {
+								this.close()
+								this.$emit('complete')
+								this.$notify({
+									message: '添加成功',
+									type: 'success'
+								});
+							} else {
+								this.$notify({
+									message: message,
+									type: 'error'
+								})
+							}
+						})
+						.catch(() => {
+							this.loading = false
+						})
 				} else {
-					newObj[attr] = obj[attr]
+					this.$api.sys.organize
+						.modify(this.formData)
+						.then(({ statusCode, data, message }) => {
+							if (statusCode == 200) {
+								this.close()
+								this.$emit('complete')
+								this.$notify({
+									message: '修改成功',
+									type: 'success'
+								});
+							} else {
+								this.$notify({
+									message: message,
+									type: 'error'
+								})
+							}
+						})
+						.catch(() => {
+							this.loading = false
+						})
 				}
-			}
-			return newObj
+			})
 		}
 	}
 }

@@ -3,7 +3,7 @@
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
 				<el-form-item label="部门名称">
-					<el-input v-model="filters.key" clearable placeholder="姓名"></el-input>
+					<el-input v-model="filters.key" clearable placeholder="部门名称"></el-input>
 				</el-form-item>
 				<el-form-item label="状态">
 					<el-select v-model="filters.status" clearable placeholder="部门状态">
@@ -42,8 +42,19 @@
 				<el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
 				<el-table-column fixed="right" label="操作" width="160">
 					<template slot-scope="scope">
-						<el-link icon="el-icon-edit" :underline="false" type="primary" @click="$refs.modify.handelModify(scope.row)">修改</el-link>
-						<el-link icon="el-icon-delete" :underline="false" type="danger" style="margin-left:15px;">删除</el-link>
+						<el-link
+							icon="el-icon-edit"
+							:underline="false"
+							type="primary"
+							@click="$refs.modify.handelModify(scope.row)"
+						>修改</el-link>
+						<el-link
+							icon="el-icon-delete"
+							:underline="false"
+							type="danger"
+							@click="deletes(scope.row)"
+							style="margin-left:15px;"
+						>删除</el-link>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -62,7 +73,7 @@ export default {
 		return {
 			filters: {
 				key: '',
-				status: ''
+				status: 1
 			},
 			loading: true,
 			options: [
@@ -80,26 +91,58 @@ export default {
 	},
 	mounted() {
 		this.init()
-		this.$refs.modify.refreshSelect();
+		//this.$refs.modify.refreshSelect();
 	},
 	methods: {
 		init: function() {
 			this.$api.sys.organize
-				.getList({
-					page: 1
-				})
+				.getList(this.filters)
 				.then(({ statusCode, data }) => {
 					this.loading = false
-					console.log(statusCode)
-					console.log(data)
 					this.tableData = data
-					console.log(this.tableData)
 				})
 				.catch(() => {
 					this.loading = false
 				})
 		},
-		searchs: function() {},
+		searchs: function() {
+			if (this.filters.status == '') {
+				this.filters.status = 0
+			}
+			this.loading = true
+			this.init()
+		},
+		deletes: function(m) {
+			var _this = this
+			this.$confirm(
+				'确认删除选中记录吗？如果下面有子级，将子级一并删除！',
+				'提示',
+				{
+					type: 'warning'
+				}
+			).then(() => {
+				this.loading = true
+				this.$api.sys.organize
+					.delete([m.id])
+					.then(({ statusCode, data, message }) => {
+						if (statusCode == 200) {
+							this.$notify({
+								message: '删除成功',
+								type: 'success'
+							})
+							this.init()
+						} else {
+							this.$notify({
+								message: message,
+								type: 'error'
+							})
+						}
+					})
+					.catch(() => {
+						this.loading = false
+					})
+			})
+		},
 		onComplete() {
 			this.init()
 		}

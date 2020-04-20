@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FytSoa.Application.Sys;
+using FytSoa.Application.Sys.Dto;
 using FytSoa.Common;
 using FytSoa.Model.Sys;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace FytSoa.Api.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ApiResult<Page<SysPost>>> List([FromBody] PageParam param) => await _sysPostService.PageList(param);
+        public async Task<ApiResult<Page<SysPost>>> List([FromQuery] PageParam param) => await _sysPostService.PageList(param);
 
         /// <summary>
         /// 添加一条信息
@@ -46,14 +47,14 @@ namespace FytSoa.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ApiResult<SysPost>> GetModel(long id) => await _sysPostService.GetModel(id);
+        public async Task<ApiResult<SysPost>> GetModel(string id) => await _sysPostService.GetModel(id);
 
         /// <summary>
         /// 删除，支持多条
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ApiResult<string>> Delete([FromBody] List<long> ids) => await _sysPostService.Delete(ids);
+        public async Task<ApiResult<string>> Delete([FromBody] List<string> ids) => await _sysPostService.Delete(ids);
 
     }
 }

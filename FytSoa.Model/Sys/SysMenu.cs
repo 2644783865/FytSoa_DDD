@@ -11,7 +11,7 @@ namespace FytSoa.Model.Sys
     /// 菜单表
     /// </summary>
     [SugarTable("sys_menu")]
-    public class SysMenu : EntityBase<long>
+    public class SysMenu : EntityBase<string>
     {
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace FytSoa.Model.Sys
         /// <summary>
         /// 父节点
         /// <summary>
-        public long ParentId { get; set; }
+        public string ParentId { get; set; }
 
         /// <summary>
         /// 父节点集合组
@@ -37,7 +37,7 @@ namespace FytSoa.Model.Sys
         /// <summary>
         /// 菜单层级
         /// <summary>
-        public int Layer { get; set; } = 0;
+        public int Layer { get; set; } = 1;
 
         /// <summary>
         /// 路由地址

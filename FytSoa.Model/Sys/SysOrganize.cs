@@ -11,13 +11,13 @@ namespace FytSoa.Model.Sys
     /// 组织机构表
     /// </summary>
     [SugarTable("sys_organize")]
-    public class SysOrganize : EntityBase<long>
+    public class SysOrganize : EntityBase<string>
     {
 
         /// <summary>
         /// 父节点
         /// <summary>
-        public long ParentId { get; set; }
+        public string ParentId { get; set; }
 
         /// <summary>
         /// 部门名称

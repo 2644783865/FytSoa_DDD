@@ -24,7 +24,7 @@ namespace FytSoa.Api.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ApiResult<Page<SysCodeType>>> List([FromBody] PageParam param) => await _sysCodeTypeService.PageList(param);
+        public async Task<ApiResult<Page<SysCodeType>>> List([FromQuery] PageParam param) => await _sysCodeTypeService.PageList(param);
 
         /// <summary>
         /// 添加一条信息
@@ -46,14 +46,14 @@ namespace FytSoa.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ApiResult<SysCodeType>> GetModel(long id) => await _sysCodeTypeService.GetModel(id);
+        public async Task<ApiResult<SysCodeType>> GetModel(string id) => await _sysCodeTypeService.GetModel(id);
 
         /// <summary>
         /// 删除，支持多条
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ApiResult<string>> Delete([FromBody] List<long> ids) => await _sysCodeTypeService.Delete(ids);
+        public async Task<ApiResult<string>> Delete([FromBody] List<string> ids) => await _sysCodeTypeService.Delete(ids);
 
     }
 }

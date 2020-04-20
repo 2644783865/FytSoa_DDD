@@ -11,7 +11,7 @@ namespace FytSoa.Model.Sys
     /// 角色表
     /// </summary>
     [SugarTable("sys_role")]
-    public class SysRole : EntityBase<long>
+    public class SysRole : EntityBase<string>
     {
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace FytSoa.Model.Sys
         /// <summary>
         /// 角色父节点
         /// <summary>
-        public long ParentId { get; set; }
+        public string ParentId { get; set; }
 
         /// <summary>
         /// 角色层级

@@ -12,7 +12,7 @@ namespace FytSoa.Model.Sys
     /// 管理员表
     /// </summary>
     [SugarTable("sys_admin")]
-    public class SysAdmin : EntityBase<long>
+    public class SysAdmin : EntityBase<string>
     {
         /// <summary>
         /// 所属角色
@@ -27,7 +27,7 @@ namespace FytSoa.Model.Sys
         /// <summary>
         /// 所属部门
         /// <summary>
-        public long OrganizeId { get; set; }
+        public string OrganizeId { get; set; }
 
         /// <summary>
         /// 所属上级部门组

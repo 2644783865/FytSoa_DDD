@@ -30,18 +30,12 @@ namespace FytSoa.Application.Sys
         /// <returns></returns>
         Task<ApiResult<string>> Modify(SysAuthority model);
 
-        /// <summary>
-        /// 根据角色查询授权列表
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<ApiResult<List<SysAuthority>>> GetListByRole(long roleId);
 
         /// <summary>
-        /// 根据角色删除授权信息
+        /// 删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<ApiResult<string>> Delete(List<long> ids);
+        Task<ApiResult<string>> Delete(List<string> ids);
     }
 }

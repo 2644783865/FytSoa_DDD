@@ -11,13 +11,13 @@ namespace FytSoa.Model.Sys
     /// 字典值表
     /// </summary>
     [SugarTable("sys_code")]
-    public class SysCode : EntityBase<long>
+    public class SysCode : EntityBase<string>
     {
 
         /// <summary>
         /// 分类编号
         /// <summary>
-        public long TypeGuid { get; set; }
+        public string TypeGuid { get; set; }
 
         /// <summary>
         /// 字典值名称

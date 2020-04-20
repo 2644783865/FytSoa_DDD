@@ -43,7 +43,7 @@ namespace FytSoa.Application.Sys
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ApiResult<SysOrganize>> GetModel(long id);
+        Task<ApiResult<SysOrganize>> GetModel(string id);
 
         /// <summary>
         /// 删除
