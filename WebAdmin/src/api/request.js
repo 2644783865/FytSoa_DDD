@@ -4,7 +4,7 @@ import { Notification, MessageBox, Message } from 'element-ui'
 
 const service = axios.create({
     // axios中请求配置有baseURL选项，表示请求URL公共部分
-    baseURL: 'http://192.168.1.3:5000/',
+    baseURL: 'http://192.168.120.67:5000/',
     // 超时
     timeout: 10000,
     withCredentials: false,
